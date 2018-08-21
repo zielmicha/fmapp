@@ -23,6 +23,7 @@ INSTALLED_APPS = [
 
     'compressor',
     'registration',
+    'haystack',
 
     'fmapp',
 ]
@@ -92,4 +93,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = DATA_DIR + '/static'
+
+MEDIA_ROOT = DATA_DIR + '/media'
+
 FILES_ROOT = DATA_DIR + '/files'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr'
+    },
+}

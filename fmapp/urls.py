@@ -9,9 +9,13 @@ urlpatterns = [
     path('', views.home),
 
     re_path(r'^file(/.*)$', views.file),
+    re_path(r'^dir-browser(/.*)$', views.dir_browser),
 
     path('upload/', views.upload),
     path('queue/', views.queue),
+    path('queue-file/<int:id>', views.queue_file),
+    path('queue-approve/<int:id>', views.queue_approve),
+    path('queue-delete/<int:id>', views.queue_delete),
 
     re_path(r'^accounts/', include('registration.backends.default.urls')),
 

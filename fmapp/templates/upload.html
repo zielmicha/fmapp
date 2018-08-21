@@ -1,5 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
+<form method=post enctype=multipart/form-data>
+  {% csrf_token %}
+  <div>
+    File:
+    <br>
+    <input type=file name=file>
+  </div>
 
+  <div>
+    Target directory:
+    <div class=dir-browser>
+      <input type=text name=target_dir value="/">
+    </div>
+  </div>
+
+
+  <div>
+    Comment (this will be only visible to the moderator):
+    <br>
+    <textarea name=comment></textarea>
+  </div>
+
+  <button>Upload</button>
+</form>
+
+{% if your_queue %}
+
+Your queued files:
+<ul>
+{% for file in your_queue %}
+<li>{{ file.file.name }}</li>
+{% endfor %}
+</ul>
+
+{% endif %}
 
 {% endblock %}

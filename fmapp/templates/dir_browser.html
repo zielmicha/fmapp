@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body data-path="{{ path }}">
+  <b>Selected directory: {{ path }}</b>
+  {% if not is_root %}
+  <div><a href="..">up</a></div>
+  {% endif %}
+  {% for item in children %}
+  <div>
+    <a href="/dir-browser{{ item.path }}">{{ item.name }}</a>
+  </div>
+  {% endfor %}
+</body>
+</html>

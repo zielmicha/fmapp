@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if files %}
+
+Files waiting in queue:
+<table class=table id=queue-table>
+  <tr>
+    <th>Name
+    <th>Comment
+    <th>Target directory
+    <th colspan=3>
+  </tr>
+{% for file in files %}
+<tr class=file>
+  <td>
+    <input type=text value="{{ file.file.name }}" name=name>
+  </td>
+  <td>
+    {{ file.comment }}
+  </td>
+  <td>
+    <span class=target-dir>{{ file.target_dir }}</span>
+    <a href="#" class=target-dir-change>Change</a>
+    <div class=target-dir-dialog>
+      <div class=dir-browser>
+        <input type=text name=change-to value="/">
+      </div>
+      <button>Ok</button>
+    </div>
+  </td>
+  <td><a href="/queue-file/{{ file.id }}" target=_blank>View</a></td>
+  <td>
+    <form action="/queue-approve/{{ file.id }}" method=POST class=approve-form>
+      {% csrf_token %}
+      <input type=hidden name=target_path value="{{ file.target_dir }}{{ file.file.name }}">
+      <button>Approve</button>
+    </form>
+  </td>
+  <td>
+    <form action="/queue-delete/{{ file.id }}" method=POST onsubmit="return confirm('Are you sure you want to delete this submission?')">
+      {% csrf_token %}
+      <button>Delete</button>
+    </form>
+  </td>
+</tr>
+{% endfor %}
+</table>
+
+{% else %}
+
+There are no queued files.
+
+{% endif %}
+
+{% endblock %}
