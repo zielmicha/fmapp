@@ -17,6 +17,8 @@ urlpatterns = [
     path('queue-approve/<int:id>', views.queue_approve),
     path('queue-delete/<int:id>', views.queue_delete),
 
+    re_path(r'^search/', include('haystack.urls')),
+
     re_path(r'^accounts/', include('registration.backends.default.urls')),
 
     re_path(r'^password_reset/$', auth_views.password_reset, name='password_reset'),

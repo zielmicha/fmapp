@@ -100,7 +100,10 @@ FILES_ROOT = DATA_DIR + '/files'
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr'
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': DATA_DIR + '/xapian_index',
     },
 }
+
+# this anyway happens it the updater process
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

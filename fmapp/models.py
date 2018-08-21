@@ -13,3 +13,9 @@ class QueuedFile(models.Model):
     file = models.FileField()
     comment = models.TextField(max_length=2000, blank=True)
     target_dir = models.CharField(max_length=200, default='/')
+
+class DiskFile(models.Model):
+    path = models.CharField(max_length=200)
+
+    size = models.IntegerField()
+    mtime = models.IntegerField()
