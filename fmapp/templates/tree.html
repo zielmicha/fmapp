@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>tree <span>{{ path }}</span></h1>
+
+<div class=actions>
+  {% if not is_root %}
+  <a href="..">
+    <i class="fas fa-level-up-alt"></i>
+    up
+  </a>
+  {% endif %}
+</div>
+
+{% if not children %}
+<div>There are no files here.</div>
+{% endif %}
+
+<table class=fs-table>
+  {% for entry in children %}
+  <tr class=clickable-row>
+    <td class=icon>
+      <i class="fas fa-{{entry.icon_name}}"></i>
+    </td>
+    <td>
+      <a href=/file{{entry.path}}>{{ entry.name }}</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

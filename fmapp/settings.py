@@ -20,6 +20,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'compressor',
+    'registration',
+
+    'fmapp',
 ]
 
 MIDDLEWARE = [
@@ -37,7 +42,7 @@ ROOT_URLCONF = 'fmapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR + '/fmapp/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -45,6 +50,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'fmapp.views.context_processor',
             ],
         },
     },
@@ -52,13 +58,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fmapp.wsgi.application'
 
+DATA_DIR = BASE_DIR + '/data'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(DATA_DIR, 'db.sqlite3'),
     }
 }
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "fmapp/static"),
+]
+
+STATICFILES_FINDERS = [
+    'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 AUTH_PASSWORD_VALIDATORS: List = []
 
@@ -73,3 +90,6 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = DATA_DIR + '/static'
+FILES_ROOT = DATA_DIR + '/files'
