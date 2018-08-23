@@ -166,3 +166,7 @@ input[type=text], input[type=password], input[type=email] {
 .target-dir-dialog .dir-browser iframe {
     border: 0px;
 }
+
+.result-text em {
+    font-weight: bold;
+}

@@ -17,7 +17,7 @@ class DiskFileIndex(indexes.SearchIndex, indexes.Indexable):
         print('indexing', settings.FILES_ROOT + obj.path)
         data = super().prepare(obj)
         f = open(settings.FILES_ROOT + obj.path, 'rb')
-        data['text'] = tika_extract(f)
+        data['text'] = obj.path + '\n\n' + tika_extract(f)
         # print('result:', data['text'])
 
         return data
@@ -26,5 +26,6 @@ def tika_extract(file):
     resp = requests.post('http://localhost:9998/tika/form',
                          files={'upload': file},
                          headers={'accept': 'text/plain'})
+    if resp.status_code == 422: return ''
     resp.raise_for_status()
     return resp.content.decode('utf8')

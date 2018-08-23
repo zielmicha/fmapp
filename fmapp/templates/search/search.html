@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+
+{% load bleach_tags %}
+
     <h2>Search</h2>
 
     <form method="get" action=".">
@@ -15,6 +18,9 @@
             {% for result in page.object_list %}
                 <p>
                     <a href="/file{{ result.object.path }}">{{ result.object.path }}</a>
+                    {% for t in result.highlighted.text %}
+                    <div class=result-text>&ndash; {{ t|bleach }}</div>
+                    {% endfor %}
                 </p>
             {% empty %}
                 <p>No results found.</p>

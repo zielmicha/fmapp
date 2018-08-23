@@ -6,6 +6,13 @@ from django.views.decorators.csrf import csrf_exempt
 from fmapp import settings, models
 import os, shutil
 from wsgiref.util import FileWrapper
+from haystack.views import SearchView
+from haystack.query import SearchQuerySet
+
+class HighlightedSearchView(SearchView):
+
+    def get_results(self):
+        return SearchQuerySet().filter(text=self.get_query()).highlight()
 
 def home(request: HttpRequest) -> HttpResponse:
     return redirect('/file/')

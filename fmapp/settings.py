@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'registration',
     'haystack',
 
+    'django_bleach',
+
     'fmapp',
 ]
 
