@@ -20,7 +20,7 @@ Pygments==2.2.0
 pysolr==3.7.0
 pytz==2018.5
 rcssmin==1.0.6
-requests==2.19.1
+requests==2.20.0
 rjsmin==1.0.12
 simplegeneric==0.8.1
 six==1.11.0
